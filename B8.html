@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./B8.css">
+</head>
+<body>
+    <nav id="main">
+     <div class="left">
+        <h1>Form đặt hành online</h1>
+        <p>THông tin người mua</p>
+        <div id="infor_left">
+            <label>Họ và tên</label>
+            <input type="text" class="infor1" required><br>
+            <label>Email</label>
+            <input type="text" class="infor1" required><br>
+            <label>Điện thoại</label>
+            <input type="text" class="infor1" required><br>
+            <label>Địa chỉ</label>
+            <input type="text" class="infor1" required><br>
+            <label>Ngày đặt</label>
+            <input type="date" class="infor1" required><br>
+            <input type="checkbox">Gửi email cho tôi
+        </div>
+     </div>
+        <div class="right">
+            <p>Thông tin người nhận</p>
+            <input type="checkbox">Tôi là người nhận
+            <br>
+            <label>Họ và tên</label>
+            <input type="text" class="infor" required><br>
+            <label>Email</label>
+            <input type="text" class="infor" required><br>
+            <label>Điện thoại</label>
+            <input type="text" class="infor" required><br>
+            <label>Địa chỉ</label>
+            <input type="text" class="infor" required><br>
+            <label>Ghi chú</label>
+            <textarea class="infor" cols="30" rows="10"></textarea>
+        </div>
+    </nav>
+        <button id="btn">Đặt hàng</button>
+        <button id="btn2">Nhập lại</button>
+        <script>
+            let infor = document.getElementsByClassName("infor1");
+            console.log(infor);
+            let button = document.getElementById("btn");
+            button.onclick = function() {
+                for (let j = 0; j < infor.length; j++) {
+                    if (infor[j].value.trim() === "") {
+                        alert("Không được để trống thông tin");
+                        return;
+                    }
+                }
+                let check = infor[0].value;
+                for (let i = 0; i < check.length; i++) {
+                    if (check[i] < 'A' || check[i] > 'Z') {
+                        alert("Tên người dùng phải viết hoa");
+                        return;
+                    }
+                }
+                copyFormData();
+            };
+        
+            function copyFormData() {
+                let recipientInfor = document.querySelectorAll("#main .right .infor");
+                for (let i = 0; i < infor.length; i++) {
+                    recipientInfor[i].value = infor[i].value;
+                }
+            }
+            
+            let button2 = document.getElementById("btn2");
+            button2.onclick = function(){
+                resetForm(); 
+            }
+        
+            function resetForm() {
+                for (let i = 0; i < infor.length; i++) {
+                    infor[i].value = "";
+                }
+                let recipientInfor = document.querySelectorAll("#main .right .infor");
+                for (let i = 0; i < recipientInfor.length; i++) {
+                    recipientInfor[i].value = "";
+                }
+            }
+        </script>
+</body>
+</html>
